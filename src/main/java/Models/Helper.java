@@ -17,9 +17,15 @@ public interface Helper {
 	final String GetCartItemsCount=" select count(*) as total from cart where username=?";
 	final String GetCartItemCount="select quantity from cart where username=? and productId=?";
 	final String QuantityStatement="update cart set quantity=? where username=? and productId=?";
+	final String AddToCart="insert into cart values(?, ?, ?);";
+	final String RemoveFromCart="delete from cart where username=? and productId=?";
+	
 	final String ProductId="productId";
 	final String Total="total";
-	
+	final String CartHandle="cartHandle";
+	final String AddToCartHandler="addToCart";
+	final String RemoveFromHandler="removeFromCart";
+
 	
 	final String Name="name";
 	final String Username="username";
