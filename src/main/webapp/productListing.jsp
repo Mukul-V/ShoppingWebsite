@@ -109,6 +109,7 @@ a, a:visited, a:hover, a:active {
 	<div class="nav">
 		<h1>Welcome <%= name %>,</h1>
 		<a class="viewCart" href="Cart.jsp">View Cart</a>
+		<a class="viewCart" href="orders.jsp">Orders</a>
 	</div>
 	<hr/>
 	<h3 style="color:<%=color%>;">As Your favorite color has unique quality, we got unique collection for you.</h3>

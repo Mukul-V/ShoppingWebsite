@@ -3,6 +3,7 @@ package Models;
 public interface Helper {
 	final String Increment="increment";
 	final String Decrement="decrement";
+	final String Delete="delete";
 	
 	final String GetAllProducts="select * from products";
 	final String GetProduct="select * from products where id=?";
@@ -25,7 +26,20 @@ public interface Helper {
 	final String CartHandle="cartHandle";
 	final String AddToCartHandler="addToCart";
 	final String RemoveFromHandler="removeFromCart";
-
+	final String CartJSP="Cart.jsp";
+	final String OrderNow="orderNow";
+	final String Handle="handle";
+	
+	final String AddOrder="insert into orders values(?, ?, ?, ?)";
+	final String AddOrderTotal="insert into orderTotal values(?, ?, ?)";
+	final String GetOrders="select * from orders  where username=?";
+	final String GetOrdersUsingID="select * from orders  where username=? and orderId=?";
+	final String GetOrderIds="select distinct orderId from orders where username=?";
+	final String GetOrderTotal="select * from orderTotal where username=? and orderId=?";
+	final String Products="products";
+	final String OrderId="orderId";
+	final String Timestamp="timestamp";
+	
 	
 	final String Name="name";
 	final String Username="username";
@@ -38,7 +52,8 @@ public interface Helper {
 	final String Description="description";
 	final String Quantity="quantity";
 	final String Id="id";
-	final String Handle="handle";
+
+
 	
 	final String User="user";
 	final String Product="product";
@@ -46,6 +61,7 @@ public interface Helper {
 	final String SignUpPage="signUp.html";
 	final String LoginPage="login.html";
 
+	final String OrdersJSP="orders.jsp";
 	final String ProductListingJSP="productListing.jsp";
 	final String ProductDisplayJSP="productDisplay.jsp";
 }

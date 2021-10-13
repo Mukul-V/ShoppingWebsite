@@ -15,6 +15,16 @@ public class Cart {
 		this.quantity=quantity;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+	public String getProductId() {
+		return productId;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	
 	public boolean increaseQuantity(String username, String productId) {
 		boolean result=false;
 		this.quantity+=1;

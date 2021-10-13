@@ -21,12 +21,10 @@ public class CartHandler extends HttpServlet implements Helper{
 			
 			if(handle.equals(AddToCartHandler)) {
 				boolean result=cartDao.addToCart(user.username, id);
-				System.out.println(result);
 				response.sendRedirect(ProductListingJSP+"?"+Id+"="+id);
 			}
 			else if(handle.equals(RemoveFromHandler)) {
 				boolean result=cartDao.removeFromCart(user.username, id);
-				System.out.println(result);
 				response.sendRedirect(ProductListingJSP+"?"+Id+"="+id);
 			}
 		}catch (Exception e) {

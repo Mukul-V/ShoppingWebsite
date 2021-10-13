@@ -23,14 +23,17 @@ public class QuantityHandler extends HttpServlet implements Helper{
 		try {
 			cart = cartDao.getCartItem(user.username, id);
 			
-			if(handle.equals(Increment)) {
-				
+			if(handle.equals(Increment)) {	
 				cart.increaseQuantity(user.username, id);
-				response.sendRedirect(ProductDisplayJSP+"?"+Id+"="+id);
+				response.sendRedirect(CartJSP);
 			}
 			else if(handle.equals(Decrement)) {
 				cart.decreaseQuantity(user.username, id);
-				response.sendRedirect(ProductDisplayJSP+"?"+Id+"="+id);
+				response.sendRedirect(CartJSP);
+			}
+			else if(handle.equals(Delete)){
+				cartDao.removeFromCart(user.username, id);
+				response.sendRedirect(CartJSP);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

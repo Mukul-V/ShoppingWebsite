@@ -25,7 +25,7 @@ public class ProductsDao implements Helper{
 		
 		while(rs.next()) {
 			Product p=new Product(rs.getString(Id), rs.getString(Title), rs.getString(ImageUrl), 
-					Double.parseDouble(rs.getString(Price)), rs.getString(Description), Integer.parseInt(rs.getString(Quantity)));
+					Double.parseDouble(rs.getString(Price)), rs.getString(Description));
 			product=p;
 		}
 		conn.close();
@@ -61,7 +61,7 @@ public class ProductsDao implements Helper{
 		
 		while(rs.next()) {
 			Product p=new Product(rs.getString("id"), rs.getString("title"), rs.getString("imageUrl"), 
-					Double.parseDouble(rs.getString("price")), rs.getString("description"), Integer.parseInt(rs.getString("quantity")));
+					Double.parseDouble(rs.getString("price")), rs.getString("description"));
 			productsList.add(p);
 		}
 		
@@ -78,7 +78,7 @@ public class ProductsDao implements Helper{
 		HashMap<String, Product> productsMap=new HashMap<>();
 		while(rs.next()) {
 			Product p=new Product(rs.getString(Id), rs.getString(Title), rs.getString(ImageUrl), 
-					Double.parseDouble(rs.getString(Price)), rs.getString(Description), Integer.parseInt(rs.getString(Quantity)));
+					Double.parseDouble(rs.getString(Price)), rs.getString(Description));
 			productsMap.put(p.id, p);
 		}
 		conn.close();
