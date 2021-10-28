@@ -87,7 +87,7 @@
 				total+=(product.price*cartItem.getQuantity());
 	%>
 		<div class="card">
-		  <img class="img" src=<%= product.ImageUrl %> alt=<%= product.title %>>
+		  <img class="img" src=<%= product.imageUrl %> alt=<%= product.title %>>
 		  <h1><%= product.title %></h1>
 		  <p class="price"><%= product.price %></p>
 		  <p><%= product.description %></p>

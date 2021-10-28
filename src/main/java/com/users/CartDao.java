@@ -1,188 +1,100 @@
 package com.users;
 import Models.*;
 import java.util.*;
-import java.sql.*;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.net.http.HttpResponse;
+
 
 public class CartDao implements Helper{
 
-	static DBConnection db=new DBConnection();
 	
-	public static boolean addToCart(String username, String productId) throws SQLException, ClassNotFoundException {
-		boolean result=false;
-		Connection conn=db.createConnection();
-		String addToCart= AddToCart;
-		if(isPresentInCart(username, productId)) {
-			conn.close();
-			return false;
-		}
-		try {
-			PreparedStatement st=conn.prepareStatement(addToCart);
-			st.setString(1, username);
-			st.setString(2, productId);
-			st.setInt(3, 1);
-			int rs=st.executeUpdate();
-			
-			if(rs > 0) {
-				result=true;
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		conn.close();
-		return result;
-	}
-	public static boolean removeFromCart(String username, String productId) throws SQLException, ClassNotFoundException {
-		boolean result=false;
-		Connection conn=db.createConnection();
-		String addToCart= RemoveFromCart;
-		try {
-			PreparedStatement st=conn.prepareStatement(addToCart);
-			st.setString(1, username);
-			st.setString(2, productId);
-			int rs=st.executeUpdate();
-			
-			if(rs > 0) {
-				result=true;
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-
-		conn.close();
-		return result;
-	}
 	
-	 public static boolean isPresentInCart(String username, String productId) throws ClassNotFoundException, SQLException {
-		 boolean result=false;
-		 //Cart cartItem=null;
-		 Connection conn=db.createConnection();
-		 String fetchCartItem= GetCartItem;
-		 try {
-		 	PreparedStatement st=conn.prepareStatement(fetchCartItem);
-		 	st.setString(1, username);
-		 	st.setString(2, productId);
-			ResultSet rs=st.executeQuery();
-			
-			while(rs.next()) {
-			//	cartItem=new Cart(rs.getString(Username), rs.getString(ProductId), Integer.parseInt(rs.getString(Quantity)));
-				result=true;
-			}
-		 }catch(Exception e) {
-			e.printStackTrace();
-		 }
+	public static boolean addToCart(String username, String productId) {
+		String url=API+Cart+AddToCart+username+"/"+productId;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		Result result=g.fromJson(res.body().toString(), Result.class);
 		
-		 conn.close();
-		 return result;
-	 }
+		return result.isResult();
+	}
+	public static boolean removeFromCart(String username, String productId){
+		String url=API+Cart+RemoveFromCart+username+"/"+productId;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		Result result=g.fromJson(res.body().toString(), Result.class);
+		
+		return result.isResult();
+	}
 	
-	public static int itemCount(String username, String productId) throws SQLException, ClassNotFoundException {
+	 public static boolean isPresentInCart(String username, String productId){
+			String url=API+Cart+IsPresent+username+"/"+productId;
+			HttpResponse res=APICall.getRequest(url);		
+			Gson g=new Gson();
+			Result result=g.fromJson(res.body().toString(), Result.class);
+			
+			return result.isResult();
+	}
+	
+	public static int itemCount(String username, String productId){
+		String url=API+Cart+ItemCount+username+"/"+productId;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		int itemCount=g.fromJson(res.body().toString(), Integer.class);
+		
+		return itemCount;	
+	}
+
+	
+	public static int itemsCount(String username){
 		int count=0;
-		Connection conn=db.createConnection();
-		String fetchCartItemCount= GetCartItemCount;
-		try {
-			PreparedStatement st=conn.prepareStatement(fetchCartItemCount);
-			st.setString(1, username);
-			st.setString(2, productId);
-			ResultSet rs=st.executeQuery();
-			
-			while(rs.next()) {
-				count=rs.getInt("quantity");
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		String url=API+Cart+ItemsCount+username;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		count=g.fromJson(res.body().toString(), Integer.class);
 		
-		conn.close();
-		return count;
-		
-	}
-
-	
-	public static int itemsCount(String username) throws ClassNotFoundException, SQLException {
-		int count=0;
-		Connection conn=db.createConnection();
-		String fetchCartItemsCount= GetCartItemsCount;
-		try {
-			PreparedStatement st=conn.prepareStatement(fetchCartItemsCount);
-			st.setString(1, username);
-			ResultSet rs=st.executeQuery();
-			
-			while(rs.next()) {
-				count=rs.getInt(Total);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		conn.close();
-		return count;
+		return count;	
 
 	}
 	
 		
-	public static ArrayList<Cart> getCart(String username) throws ClassNotFoundException, SQLException{
-		ArrayList<Cart> cartItems=new ArrayList<>();
-		Connection conn=db.createConnection();
-		String fetchCart= GetCart;
-		try {
-			PreparedStatement st=conn.prepareStatement(fetchCart);
-			st.setString(1, username);
-			ResultSet rs=st.executeQuery();
-			
-			while(rs.next()) {
-				Cart cart=new Cart(rs.getString(Username), rs.getString(ProductId), Integer.parseInt(rs.getString(Quantity)));
-				cartItems.add(cart);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		conn.close();
+	public static ArrayList<Cart> getCart(String username) {
+		String url=API+Cart+GetCart+username;
+		HttpResponse res=APICall.getRequest(url);
+		Gson g = new Gson();
+		ArrayList<Cart> cartItems=g.fromJson(res.body().toString(),new TypeToken<ArrayList<Cart>>(){}.getType());
 		return cartItems;
 	}
 
-	public static Cart getCartItem(String username, String productId) throws SQLException, ClassNotFoundException {
-		Cart cartItem=null;
-		Connection conn=db.createConnection();
-		String fetchCartItem= GetCartItem;
-		try {
-			PreparedStatement st=conn.prepareStatement(fetchCartItem);
-			st.setString(1, username);
-			st.setString(2, productId);
-			ResultSet rs=st.executeQuery();
-			
-			while(rs.next()) {
-				cartItem=new Cart(rs.getString(Username), rs.getString(ProductId), Integer.parseInt(rs.getString(Quantity)));
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	public static Cart getCartItem(String username, String productId) {
+		String url=API+Cart+GetCart+username+"/"+productId;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		Cart cartItem=g.fromJson(res.body().toString(), Cart.class);
 		
-		conn.close();
 		return cartItem;
 	}
 	
-	public static boolean changeQuantity(String username, String productId, int quantity) throws ClassNotFoundException, SQLException{
-		boolean result=false;
-		Connection conn=db.createConnection();
-		String fetchCart= QuantityStatement;
-		try {
-			PreparedStatement st=conn.prepareStatement(fetchCart);
-			st.setInt(1, quantity);
-			st.setString(2, username);
-			st.setString(3, productId);
-			int rs= st.executeUpdate();
-			
-			if(rs>0) {
-				result=true;
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	public static boolean increaseQuantity(String username, String productId){
+
+		String url=API+Cart+IncreaseQuantity+username+"/"+productId;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		Result result=g.fromJson(res.body().toString(), Result.class);
 		
-		conn.close();
-		return result;
+		return result.isResult();
+	}
+	
+	public static boolean decreaseQuantity(String username, String productId){
+
+		String url=API+Cart+DecreaseQuantity+username+"/"+productId;
+		HttpResponse res=APICall.getRequest(url);		
+		Gson g=new Gson();
+		Result result=g.fromJson(res.body().toString(), Result.class);
+		
+		return result.isResult();
 	}
 	
 }

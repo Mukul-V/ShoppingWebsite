@@ -40,46 +40,40 @@ border: none;
 		
 	%>
 	<%
-	user=(User) session.getAttribute("user");
-			
-			final String id=request.getParameter("id");
-			ProductsDao products= new ProductsDao();
-			product=products.getProduct(id);
-			
-			CartDao cartDao=new CartDao();
-			count=cartDao.itemCount(user.username, id);
-			
-			if(product != null){
+		user=(User) session.getAttribute("user");
+		
+		final String id=request.getParameter("id");
+		ProductsDao products= new ProductsDao();
+		product=products.getProduct(id);
+		
+		CartDao cartDao=new CartDao();
+		count=cartDao.itemCount(user.username, id);
+		
+		if(product != null){
 	%>
 	
-	<div >
-		<nav><a href="productListing.jsp"> &lt;- Back to Listing Page.</a></nav>
-	</div>
+		<div >
+			<nav><a href="productListing.jsp"> &lt;- Back to Listing Page.</a></nav>
+		</div>
+		
+		<h1 style='text-align:center;'><%= staticText %> <%= user.name %> !</h1>
+		
+		
+		<div style="margin-left:40%;">
+		<img src="<%= product.imageUrl %>" width="200px" height="200px" alt=<%= product.title %>/>
+		<br>
+		<h2 style="color:<%= user.color %>">Name: <%= product.title %></h2>
+		<br>
+		<h3 style="color:<%= user.color %>">Price: <%= product.price %></h3>
+		<br>
 	
-	<h1 style='text-align:center;'><%= staticText %> <%= user.name %> !</h1>
-	
-	
-	<div style="margin-left:40%;">
-	<img src="<%= product.ImageUrl %>" width="200px" height="200px" alt=<%= product.title %>/>
-	<br>
-	<h2 style="color:<%= user.color %>">Name: <%= product.title %></h2>
-	<br>
-	<h3 style="color:<%= user.color %>">Price: <%= product.price %></h3>
-	<br>
-	<h3>Quantity: <%= count %></h3>
-	<br>
-		<span>
-			<a href="handler?id=<%= product.id %>&handle=<%= increment %>">+</a> &nbsp;&nbsp;&nbsp;
-			<a href="handler?id=<%= product.id %>&handle=<%= decrement %>">-</a><br>
-		</span>
-	<br>
-	<hr>
-	<h3 style="color:<%= user.color %>">Description: <%= product.description %></h3>	
-	
-	</div>
-		<% 
-		}
-		%>
+		<hr>
+		<h3 style="color:<%= user.color %>">Description: <%= product.description %></h3>	
+		
+		</div>
+	<% 
+	}
+	%>
 </body>
 </html>
 

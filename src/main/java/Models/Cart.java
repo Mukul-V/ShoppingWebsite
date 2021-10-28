@@ -32,7 +32,7 @@ public class Cart {
 		CartDao cartDao=new CartDao();
 	
 		try {
-			result=cartDao.changeQuantity(username, productId, this.quantity);
+			result=cartDao.increaseQuantity(username, productId);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -51,7 +51,7 @@ public class Cart {
 		CartDao cartDao=new CartDao();
 	
 		try {
-			result=cartDao.changeQuantity(username, productId, this.quantity);
+			result=cartDao.decreaseQuantity(username, productId);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

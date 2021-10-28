@@ -6,21 +6,38 @@ public interface Helper {
 	final String Delete="delete";
 	
 	final String GetAllProducts="select * from products";
-	final String GetProduct="select * from products where id=?";
+	final String GetProduct="product/";
+	
+	final String API="http://localhost:8080/TestingUserDetailsAPI/webapi/";
+	final String PLP="plp/";
+	final String PDP="pdp/";
+	final String Cart="cart/";
+	final String Orders="orders/";
+	final String test="test/";
+	
+	final String GetAllIds="getAllIds";
+	final String GetAsList="getAsList";
+	final String GetAsMap="getAsMap";
+	final String AddToCart="addToCart/";
+	final String RemoveFromCart="removeFromCart/";	
+	final String IsPresent="isPresent/";
+	final String ItemsCount="itemsCount/";
+	final String ItemCount="itemCount/";
+	final String GetCart="getCart/";
+	final String ChangeQuantity="changeQuantity/";
+	final String GetAllOrders="getAllOrders/";
+	final String GetOrders="getOrders/";
+	final String GetOrderIds="getOrderIds/";
+	final String GetOrderTotal="orderTotal/";
+	final String AddOrder="addOrder/";
+	final String AddOrderTotal="addOrderTotal/";
+	final String IncreaseQuantity="increaseQuantity/";
+	final String DecreaseQuantity="decreaseQuantity/";
 	
 	final String GetAllUsers="select * from users";
 	final String SignUpStatement="insert into users values(? ,?, ?, ?)";
 	final String GetUser="select * from users where username=? and password=?";
-	
-	final String GetCart="select users.username, cart.productId, cart.quantity from users join cart on users.username=cart.username"
-			+ " where users.username=?";
-	final String GetCartItem="select * from cart where username=? and productId=?";
-	final String GetCartItemsCount=" select count(*) as total from cart where username=?";
-	final String GetCartItemCount="select quantity from cart where username=? and productId=?";
-	final String QuantityStatement="update cart set quantity=? where username=? and productId=?";
-	final String AddToCart="insert into cart values(?, ?, ?);";
-	final String RemoveFromCart="delete from cart where username=? and productId=?";
-	
+		
 	final String ProductId="productId";
 	final String Total="total";
 	final String CartHandle="cartHandle";
@@ -30,12 +47,6 @@ public interface Helper {
 	final String OrderNow="orderNow";
 	final String Handle="handle";
 	
-	final String AddOrder="insert into orders values(?, ?, ?, ?)";
-	final String AddOrderTotal="insert into orderTotal values(?, ?, ?)";
-	final String GetOrders="select * from orders  where username=?";
-	final String GetOrdersUsingID="select * from orders  where username=? and orderId=?";
-	final String GetOrderIds="select distinct orderId from orders where username=?";
-	final String GetOrderTotal="select * from orderTotal where username=? and orderId=?";
 	final String Products="products";
 	final String OrderId="orderId";
 	final String Timestamp="timestamp";

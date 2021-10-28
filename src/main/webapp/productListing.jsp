@@ -69,17 +69,11 @@ a, a:visited, a:hover, a:active {
 	justify-content: space-between;
 }
 
-
-
-
-
 </style>
 </head>
 <body>
 	  
-	  <%!	  
-		
-	  
+	  <%!
 	  String name="", password="", color="";
 	  String addToCart="addToCart";
 	  String removeFromCart="removeFromCart";
@@ -102,6 +96,7 @@ a, a:visited, a:hover, a:active {
 		ProductsDao productsObj=new ProductsDao();
 		products=productsObj.getAsList();
 		
+		
 			}catch(Exception e){
 		response.sendRedirect("/index.html");
 			}
@@ -122,7 +117,7 @@ a, a:visited, a:hover, a:active {
 	%>
 	<div class="card"> 
 	<a class="disable" href="productDisplay.jsp?id=<%= product.id %>">
-	    <img src="<%= product.ImageUrl %>" alt="<%= product.title %>" style="width:100px;height:100px;"/>
+	    <img src="<%= product.imageUrl %>" alt="<%= product.title %>" style="width:100px;height:100px;"/>
 	  <h1><%= product.title %></h1>
 	  <p class="price"> &#8377; <%= product.price %></p>
 	  <p><%= product.description %></p>

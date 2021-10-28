@@ -7,17 +7,17 @@ import com.users.DBConnection;
 public class Product{
 	public String id;
 	public String title;
-	public String ImageUrl;
+	public String imageUrl;
 	public double price;
 	public String description;
-	//public int qty;
+
 	
-	public Product(String id,String title, String ImageUrl, double price, String description) {
+	public Product(String id,String title, String imageUrl, double price, String description) {
 		this.id=id;
 		this.title=title;
-		this.ImageUrl=ImageUrl;
+		this.imageUrl=imageUrl;
 		this.price=price;
 		this.description=description;
-//		this.qty=qty;
+
 	}
 }
