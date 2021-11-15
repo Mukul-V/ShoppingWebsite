@@ -8,13 +8,16 @@ public interface Helper {
 	final String GetAllProducts="select * from products";
 	final String GetProduct="product/";
 	
-	final String API="http://localhost:8080/TestingUserDetailsAPI/webapi/";
+	final String API="http://localhost:8080/ECommerceAPI/webapi/";
+	final String Users="users/";
 	final String PLP="plp/";
 	final String PDP="pdp/";
 	final String Cart="cart/";
 	final String Orders="orders/";
 	final String test="test/";
-	
+
+	final String Login="login";
+	final String SignUp="signUp";
 	final String GetAllIds="getAllIds";
 	final String GetAsList="getAsList";
 	final String GetAsMap="getAsMap";
@@ -34,10 +37,7 @@ public interface Helper {
 	final String IncreaseQuantity="increaseQuantity/";
 	final String DecreaseQuantity="decreaseQuantity/";
 	
-	final String GetAllUsers="select * from users";
-	final String SignUpStatement="insert into users values(? ,?, ?, ?)";
-	final String GetUser="select * from users where username=? and password=?";
-		
+	
 	final String ProductId="productId";
 	final String Total="total";
 	final String CartHandle="cartHandle";

@@ -9,8 +9,6 @@ import java.net.http.HttpResponse;
 
 
 public class CartDao implements Helper{
-
-	
 	
 	public static boolean addToCart(String username, String productId) {
 		String url=API+Cart+AddToCart+username+"/"+productId;
